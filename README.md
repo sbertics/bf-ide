@@ -1,7 +1,6 @@
-
 bf-ide
-by Scott Bertics
 ======
+by Scott Bertics
 
 APPLICATION OVERVIEW
 

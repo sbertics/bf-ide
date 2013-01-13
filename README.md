@@ -2,6 +2,8 @@ bf-ide
 ======
 by Scott Bertics
 
+(Note: Currently under development.  Much of the functionality has not been added yet.)
+
 APPLICATION OVERVIEW
 
 bf-ide is a fully functional integrated developement environment (IDE) for BF written in Java.

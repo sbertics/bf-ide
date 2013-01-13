@@ -38,3 +38,7 @@ This program will print the character '0' (ascii value 48):
 
 This program will print 'Hello World!':
 ++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.
+
+This program reads in two characters and prints out the character representing their sum modulo 256:
+,>,[-<+>]<.
+

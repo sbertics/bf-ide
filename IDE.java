@@ -27,7 +27,7 @@ public class IDE extends JFrame implements ActionListener, WindowListener, Compo
 	private static JFrame optionsMenu;
 	private static boolean auto_resize_internal_frames;
 	
-	private static BrainFuck currentProgram;
+	private static BF currentProgram;
 
 
 	/*****************
@@ -36,9 +36,6 @@ public class IDE extends JFrame implements ActionListener, WindowListener, Compo
 	 * -IDE: A default constructor.
 	 ****************/
 	public static void print(char c){
-//		for(int i = 0; i < NON_PRINTING_CHARS.length; i++){
-//			if((int)(c) == NON_PRINTING_CHARS[i]) return;
-//		}
 		output_text.append(""+c);
 	}
 	
@@ -65,7 +62,7 @@ public class IDE extends JFrame implements ActionListener, WindowListener, Compo
 		initializeMemoryAnalyzer();
 		
 		//Initialize the brainfuck object
-		currentProgram = new BrainFuck(INIT_BUFFER_SIZE);
+		currentProgram = new BF(INIT_BUFFER_SIZE);
 		
 		//Make the screen visible to start the program
 		setVisible(true);
@@ -133,11 +130,11 @@ public class IDE extends JFrame implements ActionListener, WindowListener, Compo
 	private void initializePlayback(){
 		playback = new JInternalFrame("Playback",true,false,false,false);
 		JPanel buttonsPanel = new JPanel();
-		addButton(buttonsPanel, play_button, "b1.png", "Play");
-		addButton(buttonsPanel, pause_button, "b8.png", "Pause");
-		addButton(buttonsPanel, next_button, "b3.png", "Next");
-		addButton(buttonsPanel, prev_button, "b4.png", "Prev");
-		addButton(buttonsPanel, stop_button, "b7.png", "Stop");
+		addButton(buttonsPanel, play_button, IMAGES_PATH + "play.png", "Play");
+		addButton(buttonsPanel, pause_button, IMAGES_PATH + "pause.png", "Pause");
+		addButton(buttonsPanel, next_button, IMAGES_PATH + "next.png", "Next");
+		addButton(buttonsPanel, prev_button, IMAGES_PATH + "prev.png", "Prev");
+		addButton(buttonsPanel, stop_button, IMAGES_PATH + "stop.png", "Stop");
 		playback.add(buttonsPanel);
 		pane.add(playback);
 		playback.setVisible(true);
@@ -203,14 +200,10 @@ public class IDE extends JFrame implements ActionListener, WindowListener, Compo
 		currentProgram.play();
 	}
 	
-	private void next(){
-//		if (!currentProgram.isRunning()){
-//			output_text.setText("");
-//			currentProgram.setProgram(program_text.getText());
-//		}
-//		currentProgram.nextStep();
-	}
-
+	private void next(){}
+	private void prev(){}
+	private void stop(){}
+	
 	private void resizeBuffer(){
 		String value = JOptionPane.showInputDialog(this,
 				"Enter a size for the program buffer.\n(Between 1 and " + Integer.MAX_VALUE + ")", "Set Buffer Size");
@@ -480,16 +473,15 @@ public class IDE extends JFrame implements ActionListener, WindowListener, Compo
 		}
 		
 		if (description.equals("Play")){
-			System.out.println("play");
 			play();
 		}else if(description.equals("Pause")){
 			//currentProgram.pause();
 		}else if (description.equals("Next")){
 			next();
 		}else if (description.equals("Prev")){
-			//prev();
+			prev();
 		}else if (description.equals("Stop")){
-			//stop();
+			stop();
 		}else if (description.equals("Set Buffer Size")){
 			resizeBuffer();
 		}else if(description.equals("Auto-Indent Program")){

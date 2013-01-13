@@ -3,38 +3,40 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- * class: BrainFuck
- * A brainfuck object stores all of the data that defines
- * a brainfuck program and includes the necessary methods
+ * class: BF
+ * A BF object stores all of the data that defines
+ * a BF program and includes the necessary methods
  * to run instances of that program.
  */
-public class BrainFuck implements ProgramConstants{
+public class BF implements ProgramConstants{
 	
 	private byte[] tape;
 	private int pointer;
+	private int buffer_size;
 	
 	private String program;
 	private int index;
 	private String input_buffer;
 	
-	private BFProgram currentProgram;
-	private Thread currentProgramThread;
-	
 	/*****************
 	 * PUBLICLY ACCESSIBLE METHODS
-	 * -BrainFuck: Constructor instantiates the object.
+	 * -BF: Constructor instantiates the object.
+	 * -resetProgram: Resets the interpreter and memory state to run a program.
 	 * -getBufferSize: Returns size of the program's tape.
 	 * -setBufferSize: Reallocates a tape for the program
 	 * -setProgram: Sets the program string
 	 ****************/
-	public BrainFuck(int bufferSize){
-		tape = new byte[bufferSize];
-		for(int i = 0; i < bufferSize; i++) tape[i] = 0;
-		pointer = 0;
+	public BF(int bufferSize){
+		buffer_size = bufferSize;
 		program = "";
-		index = 0;
 		input_buffer = "";
-		currentProgram = null;
+	}
+	
+	private void resetProgram(){
+		tape = new byte[buffer_size];
+		for(int i = 0; i < buffer_size; i++) tape[i] = 0;
+		pointer = 0;
+		index = 0;
 	}
 	
 	public int getBufferSize(){
@@ -92,10 +94,13 @@ public class BrainFuck implements ProgramConstants{
 	 */
 	
 	public void play(){
+		resetProgram();
 		while (index != program.length()) executeInstruction();
 	}
 	
 	public void nextStep(){}
+	public void prevStep(){}
+	public void stop(){}
 	
 	/**
 	 * PROGRAM LOGIC:
@@ -170,45 +175,5 @@ public class BrainFuck implements ProgramConstants{
 	
 	private void requestInput(){
 		addInput(JOptionPane.showInputDialog(null, "The Program Requests Additional Input", ""));
-	}
-	
-	private class BFProgram implements Runnable{
-		
-		private byte[] tape;
-		private int pointer;
-		
-		private String program;
-		private int index;
-		private String input_buffer;
-		
-		private boolean pauseExecution;
-		
-		public BFProgram(byte[] tape, int pointer, String program, int index, String input_buffer, boolean pauseExecution){
-			this.tape = tape;
-			this.pointer = pointer;
-			this.program = program;
-			this.index = index;
-			this.input_buffer = input_buffer;
-			this.pauseExecution = pauseExecution;
-		}
-		
-		public void pause(){
-			pauseExecution = true;
-		}
-		
-		public void next(){
-			if (index != program.length()) executeInstruction();
-		}
-		
-		public void resume(){
-			pauseExecution = false;
-		}
-		
-		public void run() {
-			System.out.println("Run");
-		}
-		
-
-		
 	}
 }

@@ -11,6 +11,7 @@ public interface ProgramConstants {
 	static final int SPACES_PER_TAB = 4;
 	static final int OPTIONS_MENU_WIDTH = 500;
 	static final int OPTIONS_MENU_HEIGHT = 360;
+	static final String IMAGES_PATH = "./img/";
 	
 	//JMenu Constants
 	static final Color MENU_COLOR = Color.gray;

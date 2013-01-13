@@ -1,6 +1,8 @@
 bf-ide
 ======
-by Scott Bertics
+Scott Bertics
+
+1/12/12
 
 (Note: Currently under development.  Much of the functionality has not been added yet.)
 
